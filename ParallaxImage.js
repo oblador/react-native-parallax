@@ -33,6 +33,7 @@ var ParallaxImage = React.createClass({
   },
 
   getInitialState: function() {
+    this.isLayoutStale = true;
     return {
       offset: 0,
       height: 0,
@@ -47,10 +48,17 @@ var ParallaxImage = React.createClass({
 
   // Measure again since onLayout event won't pass the offset
   handleLayout: function(event) {
-    this._root.measure(this.handleMeasure);
+    if(this.isLayoutStale) {
+      this._root.measure(this.handleMeasure);
+    }
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    this.isLayoutStale = !_.isEqual(nextProps, this.props);
   },
 
   handleMeasure: function(ox, oy, width, height, px, py) {
+    this.isLayoutStale = false;
     this.setState({
       offset: py,
       height,
@@ -63,6 +71,7 @@ var ParallaxImage = React.createClass({
     var { scrollY, parallaxFactor } = this.props;
     var parallaxPadding = height * parallaxFactor;
 
+    // Ignore styles not specific to the image, such as margin
     var imageStyle = _.pick(flattenStyle(this.props.style), Object.keys(ImageStylePropTypes));
     imageStyle.height = height + parallaxPadding * 2;
     imageStyle.width = width;
@@ -70,14 +79,15 @@ var ParallaxImage = React.createClass({
       imageStyle.transform = [
         {
           translateY:   scrollY.interpolate({
-          inputRange:   [offset - height, offset + WINDOW_HEIGHT + height],
-          outputRange:  [parallaxPadding * -1, parallaxPadding]}),
+            inputRange:   [offset - height, offset + WINDOW_HEIGHT + height],
+            outputRange:  [-parallaxPadding, parallaxPadding]
+          }),
           extrapolate:  'clamp',
         },
       ];
     } else {
       imageStyle.transform = [
-        { translateY: parallaxPadding * -1 },
+        { translateY: -parallaxPadding },
       ];
     }
     var props = _.omit(this.props, 'style', 'children', 'scrollY', 'parallaxFactor');
