@@ -1,0 +1,36 @@
+{
+  "name": "react-native-parallax",
+  "version": "0.1.0",
+  "description": "Parallax effects for React Native using Animated API",
+  "main": "index.js",
+  "scripts": {
+    "test": "flow check"
+  },
+  "keywords": [
+    "react-native",
+    "react-component",
+    "react-native-component",
+    "react",
+    "mobile",
+    "ios",
+    "ui",
+    "parallax",
+    "image"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://oblador@github.com/oblador/react-native-parallax.git"
+  },
+  "author": "Joel Arvidsson <joel@oblador.se>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oblador/react-native-parallax/issues"
+  },
+  "homepage": "https://github.com/oblador/react-native-parallax",
+  "peerDependencies": {
+    "react-native": ">=0.8.0 || 0.8.0-rc || 0.8.0-rc.2"
+  },
+  "dependencies": {
+    "lodash": "^3.8.0"
+  }
+}
