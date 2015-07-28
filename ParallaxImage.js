@@ -54,7 +54,9 @@ var ParallaxImage = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
-    this.isLayoutStale = !_.isEqual(nextProps, this.props);
+    if(!_.isEqual(nextProps, this.props)) {
+      this.isLayoutStale = true;
+    }
   },
 
   handleMeasure: function(ox, oy, width, height, px, py) {
