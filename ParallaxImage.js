@@ -38,6 +38,7 @@ var ParallaxImage = React.createClass({
       offset: 0,
       height: 0,
       width:  0,
+      measured: false,
     };
   },
 
@@ -54,7 +55,9 @@ var ParallaxImage = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
-    this.isLayoutStale = !_.isEqual(nextProps, this.props);
+    if (this.state.measured === true) {
+      this.isLayoutStale = !_.isEqual(nextProps, this.props);
+    }
   },
 
   handleMeasure: function(ox, oy, width, height, px, py) {
@@ -63,6 +66,7 @@ var ParallaxImage = React.createClass({
       offset: py,
       height,
       width,
+      measured: true,
     });
   },
 
