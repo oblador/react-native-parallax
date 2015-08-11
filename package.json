@@ -1,6 +1,6 @@
 {
   "name": "react-native-parallax",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Parallax effects for React Native using Animated API",
   "main": "index.js",
   "scripts": {
@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/oblador/react-native-parallax",
   "peerDependencies": {
-    "react-native": ">=0.8.0 || 0.8.0-rc || 0.8.0-rc.2"
+    "react-native": ">=0.8.0 || 0.8.0-rc || 0.8.0-rc.2 || 0.9.0-rc"
   },
   "dependencies": {
     "lodash": "^3.8.0"
