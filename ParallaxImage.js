@@ -102,6 +102,7 @@ var ParallaxImage = React.createClass({
         <Animated.Image
           {...props}
           style={imageStyle}
+          pointerEvents="none"
         />
         <View style={[styles.overlay, this.props.overlayStyle]}>
           {this.props.children}
