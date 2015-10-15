@@ -7,23 +7,22 @@ var _ = require('lodash');
 var React = require('react-native');
 var {
   View,
+  Image,
   Animated,
   StyleSheet,
   Dimensions,
+  TouchableHighlight,
 } = React;
-
-var flattenStyle = require('react-native/Libraries/StyleSheet/flattenStyle');
-var StyleSheetPropType = require('react-native/Libraries/StyleSheet/StyleSheetPropType');
-var ViewStylePropTypes = require('react-native/Libraries/Components/View/ViewStylePropTypes');
-var ImageStylePropTypes = require('react-native/Libraries/Image/ImageStylePropTypes');
 
 var WINDOW_HEIGHT = Dimensions.get('window').height;
 
 var ParallaxImage = React.createClass({
   propTypes: {
-    scrollY:        React.PropTypes.object.isRequired,
+    onPress:        React.PropTypes.func,
+    scrollY:        React.PropTypes.object,
     parallaxFactor: React.PropTypes.number,
-    overlayStyle:   StyleSheetPropType(ViewStylePropTypes),
+    imageStyle:     Image.propTypes.style,
+    overlayStyle:   View.propTypes.style,
   },
 
   getDefaultProps: function() {
@@ -41,15 +40,14 @@ var ParallaxImage = React.createClass({
     };
   },
 
-  // Needed to be able to wrap the image with a Touchable*
   setNativeProps: function(nativeProps) {
-    this._root.setNativeProps(nativeProps);
+    this._container.setNativeProps(nativeProps);
   },
 
   // Measure again since onLayout event won't pass the offset
   handleLayout: function(event) {
     if(this.isLayoutStale) {
-      this._root.measure(this.handleMeasure);
+      (this._touchable || this._container).measure(this.handleMeasure);
     }
   },
 
@@ -70,15 +68,24 @@ var ParallaxImage = React.createClass({
 
   render: function() {
     var { offset, width, height } = this.state;
-    var { scrollY, parallaxFactor } = this.props;
+    var {
+      onPress,
+      scrollY,
+      parallaxFactor,
+      style,
+      imageStyle,
+      overlayStyle,
+      children,
+      ...props
+    } = this.props;
     var parallaxPadding = height * parallaxFactor;
 
-    // Ignore styles not specific to the image, such as margin
-    var imageStyle = _.pick(flattenStyle(this.props.style), Object.keys(ImageStylePropTypes));
-    imageStyle.height = height + parallaxPadding * 2;
-    imageStyle.width = width;
+    var parallaxStyle = {
+      height: height + parallaxPadding * 2,
+      width: width,
+    };
     if(scrollY) {
-      imageStyle.transform = [
+      parallaxStyle.transform = [
         {
           translateY:   scrollY.interpolate({
             inputRange:   [offset - height, offset + WINDOW_HEIGHT + height],
@@ -88,27 +95,36 @@ var ParallaxImage = React.createClass({
         },
       ];
     } else {
-      imageStyle.transform = [
+      parallaxStyle.transform = [
         { translateY: -parallaxPadding },
       ];
     }
-    var props = _.omit(this.props, 'style', 'children', 'scrollY', 'parallaxFactor');
-    return (
+    var content = (
       <View
-        ref={component => this._root = component}
-        style={[this.props.style, styles.container]}
+        ref={component => this._container = component}
+        style={[style, styles.container]}
         onLayout={this.handleLayout}
       >
         <Animated.Image
           {...props}
-          style={imageStyle}
+          style={[imageStyle, parallaxStyle]}
           pointerEvents="none"
         />
-        <View style={[styles.overlay, this.props.overlayStyle]}>
-          {this.props.children}
+        <View style={[styles.overlay, overlayStyle]}>
+          {children}
         </View>
       </View>
     );
+    // Since we can't allow nested Parallax.Images, we supply this shorthand to wrap a touchable
+    // around the element
+    if(onPress) {
+      return (
+        <TouchableHighlight ref={component => this._touchable = component} onPress={onPress}>
+          {content}
+        </TouchableHighlight>
+      );
+    }
+    return content;
   }
 });
 

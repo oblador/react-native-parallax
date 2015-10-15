@@ -10,7 +10,7 @@ var {
 
 var ParallaxMixin = {
   componentWillMount: function() {
-    this.images = [];
+    console.log('Parallax.Mixin is deprecated, use Parallax.ScrollView instead');
     var scrollY = new Animated.Value(0);
     this.setState({
       parallaxScrollY: scrollY,
