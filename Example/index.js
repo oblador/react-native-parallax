@@ -68,20 +68,13 @@ var SECTIONS = [
 ];
 
 var Example = React.createClass({
-  mixins: [Parallax.Mixin],
-
   render: function() {
     return (
-      <ScrollView
-        style={styles.scrollView}
-        scrollEventThrottle={16}
-        onScroll={this.onParallaxScroll}
-      >
+      <Parallax.ScrollView style={styles.scrollView} imageNestLevel={3}>
       {SECTIONS.map((section, i) => (
         <Parallax.Image
           key={i}
           style={styles.image}
-          scrollY={this.state.parallaxScrollY}
           overlayStyle={styles.overlay}
           source={{ uri: IMAGE_URI_PREFIX + section.keyword }}
           parallaxFactor={PARALLAX_FACTOR}
@@ -90,7 +83,7 @@ var Example = React.createClass({
           <Text style={styles.url}>Source: {IMAGE_URI_PREFIX + section.keyword}</Text>
         </Parallax.Image>
       ))}
-      </ScrollView>
+      </Parallax.ScrollView>
     );
   },
 });
