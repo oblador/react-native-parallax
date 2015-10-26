@@ -16,15 +16,21 @@ var {
 var ParallaxImage = require('./ParallaxImage');
 
 var applyPropsToParallaxImages = function(children, props) {
-  return children.map(child => {
-    if(isArray(child)) {
-      return applyPropsToParallaxImages(child, props);
-    }
-    if(child.type === ParallaxImage) {
-      return cloneWithProps(child, props);
-    }
-    return child;
-  });
+  if(isArray(children)) {
+    return children.map(child => {
+      if(isArray(child)) {
+        return applyPropsToParallaxImages(child, props);
+      }
+      if(child.type === ParallaxImage) {
+        return cloneWithProps(child, props);
+      }
+      return child;
+    });
+  }
+  if(children.type === ParallaxImage) {
+    return cloneWithProps(children, props);
+  }
+  return children;
 };
 
 
