@@ -3,7 +3,7 @@
  */
 'use strict';
 
-var _ = require('lodash');
+var isEqual = require('lodash/lang/isEqual');
 var React = require('react-native');
 var {
   View,
@@ -52,7 +52,7 @@ var ParallaxImage = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
-    if(!_.isEqual(nextProps, this.props)) {
+    if(!isEqual(nextProps, this.props)) {
       this.isLayoutStale = true;
     }
   },

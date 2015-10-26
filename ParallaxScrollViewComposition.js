@@ -3,7 +3,7 @@
  */
 'use strict';
 
-var _ = require('lodash');
+var isArray = require('lodash/lang/isArray');
 var React = require('react-native');
 var {
   Animated,
@@ -17,7 +17,7 @@ var ParallaxImage = require('./ParallaxImage');
 
 var applyPropsToParallaxImages = function(children, props) {
   return children.map(child => {
-    if(_.isArray(child)) {
+    if(isArray(child)) {
       return applyPropsToParallaxImages(child, props);
     }
     if(child.type === ParallaxImage) {
