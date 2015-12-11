@@ -7,10 +7,7 @@ var isArray = require('lodash/lang/isArray');
 var React = require('react-native');
 var {
   Animated,
-  ScrollView,
-  addons: {
-    cloneWithProps
-  },
+  ScrollView
 } = React;
 
 var ParallaxImage = require('./ParallaxImage');
@@ -22,13 +19,13 @@ var applyPropsToParallaxImages = function(children, props) {
         return applyPropsToParallaxImages(child, props);
       }
       if(child.type === ParallaxImage) {
-        return cloneWithProps(child, props);
+        return React.cloneElement(child, props);
       }
       return child;
     });
   }
   if(children.type === ParallaxImage) {
-    return cloneWithProps(children, props);
+    return React.cloneElement(children, props);
   }
   return children;
 };
