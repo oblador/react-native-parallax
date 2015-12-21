@@ -40,6 +40,10 @@ var ParallaxScrollViewComposition = React.createClass({
     this._root.setNativeProps(nativeProps);
   },
 
+  getScrollResponder: function() {
+    return this._scrollComponent.getScrollResponder();
+  },
+
   componentWillMount: function() {
     var scrollY = new Animated.Value(0);
     this.setState({ scrollY });
