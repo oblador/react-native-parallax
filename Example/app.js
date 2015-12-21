@@ -6,7 +6,6 @@
 
 var React = require('react-native');
 var {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
@@ -22,7 +21,7 @@ var IMAGE_HEIGHT = IMAGE_WIDTH / 2;
 var PIXEL_RATIO = PixelRatio.get();
 var PARALLAX_FACTOR = 0.3;
 
-var IMAGE_URI_PREFIX = 'http://loremflickr.com/' + (IMAGE_WIDTH * PIXEL_RATIO) + '/' + (IMAGE_HEIGHT * (1 + PARALLAX_FACTOR * 2) * PIXEL_RATIO) + '/'
+var IMAGE_URI_PREFIX = 'http://loremflickr.com/' + (IMAGE_WIDTH * PIXEL_RATIO) + '/' + Math.round(IMAGE_HEIGHT * (1 + PARALLAX_FACTOR * 2) * PIXEL_RATIO) + '/'
 
 var SECTIONS = [
   {
@@ -70,7 +69,7 @@ var SECTIONS = [
 var Example = React.createClass({
   render: function() {
     return (
-      <Parallax.ScrollView style={styles.scrollView} imageNestLevel={3}>
+      <Parallax.ScrollView style={styles.scrollView}>
       {SECTIONS.map((section, i) => (
         <Parallax.Image
           key={i}
@@ -121,4 +120,4 @@ var styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('Example', () => Example);
+module.exports = Example;
