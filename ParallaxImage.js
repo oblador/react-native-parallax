@@ -70,6 +70,7 @@ var ParallaxImage = React.createClass({
     var { offset, width, height } = this.state;
     var {
       onPress,
+      underlayColor,
       scrollY,
       parallaxFactor,
       style,
@@ -119,7 +120,7 @@ var ParallaxImage = React.createClass({
     // around the element
     if(onPress) {
       return (
-        <TouchableHighlight ref={component => this._touchable = component} onPress={onPress}>
+        <TouchableHighlight underlayColor={underlayColor} ref={component => this._touchable = component} onPress={onPress}>
           {content}
         </TouchableHighlight>
       );
