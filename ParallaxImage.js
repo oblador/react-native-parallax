@@ -11,7 +11,7 @@ var {
   Animated,
   StyleSheet,
   Dimensions,
-  TouchableHighlight,
+  TouchableOpacity,
 } = React;
 
 var WINDOW_HEIGHT = Dimensions.get('window').height;
@@ -21,6 +21,7 @@ var ParallaxImage = React.createClass({
     onPress:        React.PropTypes.func,
     scrollY:        React.PropTypes.object,
     parallaxFactor: React.PropTypes.number,
+    activeOpacity:  React.PropTypes.number,
     imageStyle:     Image.propTypes.style,
     overlayStyle:   View.propTypes.style,
   },
@@ -70,6 +71,7 @@ var ParallaxImage = React.createClass({
     var { offset, width, height } = this.state;
     var {
       onPress,
+      underlayColor,
       scrollY,
       parallaxFactor,
       style,
@@ -119,9 +121,9 @@ var ParallaxImage = React.createClass({
     // around the element
     if(onPress) {
       return (
-        <TouchableHighlight ref={component => this._touchable = component} onPress={onPress}>
+        <TouchableOpacity activeOpacity={this.props.activeOpacity || .5} ref={component => this._touchable = component} onPress={onPress}>
           {content}
-        </TouchableHighlight>
+        </TouchableOpacity>
       );
     }
     return content;
