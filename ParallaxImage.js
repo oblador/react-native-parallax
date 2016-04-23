@@ -21,6 +21,7 @@ var ParallaxImage = React.createClass({
     onPress:        React.PropTypes.func,
     scrollY:        React.PropTypes.object,
     parallaxFactor: React.PropTypes.number,
+    activeOpacity:  React.PropTypes.number,
     imageStyle:     Image.propTypes.style,
     overlayStyle:   View.propTypes.style,
   },
@@ -120,9 +121,9 @@ var ParallaxImage = React.createClass({
     // around the element
     if(onPress) {
       return (
-        <TouchableHighlight underlayColor={underlayColor} ref={component => this._touchable = component} onPress={onPress}>
+        <TouchableOpacity activeOpacity={this.props.activeOpacity || .5} ref={component => this._touchable = component} onPress={onPress}>
           {content}
-        </TouchableHighlight>
+        </TouchableOpacity>
       );
     }
     return content;
