@@ -11,7 +11,7 @@ var {
   Animated,
   StyleSheet,
   Dimensions,
-  TouchableHighlight,
+  TouchableOpacity,
 } = React;
 
 var WINDOW_HEIGHT = Dimensions.get('window').height;
