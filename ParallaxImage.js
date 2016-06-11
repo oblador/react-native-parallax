@@ -4,7 +4,7 @@
 'use strict';
 
 var isEqual = require('lodash/lang/isEqual');
-var React = require('react-native');
+var React = require('react');
 var {
   View,
   Image,
@@ -12,7 +12,7 @@ var {
   StyleSheet,
   Dimensions,
   TouchableHighlight,
-} = React;
+} = require('react-native');
 
 var WINDOW_HEIGHT = Dimensions.get('window').height;
 

@@ -4,11 +4,11 @@
 'use strict';
 
 var isArray = require('lodash/lang/isArray');
-var React = require('react-native');
+var React = require('react');
 var {
   Animated,
   ScrollView
-} = React;
+} = require('react-native');
 
 var ParallaxImage = require('./ParallaxImage');
 
