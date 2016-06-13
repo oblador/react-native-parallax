@@ -4,7 +4,7 @@
  */
 'use strict';
 
-var React = require('react-native');
+var React = require('react');
 var {
   StyleSheet,
   Text,
@@ -12,7 +12,7 @@ var {
   ScrollView,
   Dimensions,
   PixelRatio,
-} = React;
+} = require('react-native');
 
 var Parallax = require('react-native-parallax');
 

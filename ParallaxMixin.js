@@ -3,10 +3,9 @@
  */
 'use strict';
 
-var React = require('react-native');
 var {
   Animated,
-} = React;
+} = require('react-native');
 
 var ParallaxMixin = {
   componentWillMount: function() {
