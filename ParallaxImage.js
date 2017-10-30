@@ -47,7 +47,7 @@ class ParallaxImage extends React.Component<Props, State> {
 
   componentWillReceiveProps(nextProps: Props) {
     if (!isEqual(nextProps, this.props)) {
-      this.setState((isLayoutStale: true))
+      this.setState({ isLayoutStale: true })
     }
   }
 
