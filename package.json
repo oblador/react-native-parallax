@@ -29,6 +29,8 @@
   },
   "homepage": "https://github.com/oblador/react-native-parallax",
   "dependencies": {
-    "lodash": "^3.10.1"
+    "create-react-class": "^15.6.2",
+    "lodash": "^3.10.1",
+    "prop-types": "^15.6.0"
   }
 }

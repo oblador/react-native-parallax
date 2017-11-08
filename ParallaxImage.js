@@ -5,6 +5,8 @@
 
 var isEqual = require('lodash/lang/isEqual');
 var React = require('react');
+var createReactClass = require('create-react-class');
+var PropTypes = require('prop-types');
 var {
   View,
   Image,
@@ -16,11 +18,11 @@ var {
 
 var WINDOW_HEIGHT = Dimensions.get('window').height;
 
-var ParallaxImage = React.createClass({
+var ParallaxImage = createReactClass({
   propTypes: {
-    onPress:        React.PropTypes.func,
-    scrollY:        React.PropTypes.object,
-    parallaxFactor: React.PropTypes.number,
+    onPress:        PropTypes.func,
+    scrollY:        PropTypes.object,
+    parallaxFactor: PropTypes.number,
     imageStyle:     Image.propTypes.style,
     overlayStyle:   View.propTypes.style,
   },
