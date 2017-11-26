@@ -34,7 +34,8 @@ class ParallaxImage extends React.Component<Props, State> {
 		parallaxFactor: PropTypes.number,
 		imageStyle: ViewPropTypes.style,
 		overlayStyle: ViewPropTypes.style,
-		cardStyle: ViewPropTypes.style
+		cardStyle: ViewPropTypes.style,
+		cardStyleImage: ViewPropTypes.style
 	}
 
 	constructor(props: Props) {
@@ -79,6 +80,7 @@ class ParallaxImage extends React.Component<Props, State> {
 			imageStyle,
 			overlayStyle,
 			cardStyle,
+			cardStyleImage,
 			children,
 			...props
 		} = this.props
@@ -109,17 +111,24 @@ class ParallaxImage extends React.Component<Props, State> {
 				cardMaxElevation={2}
 				cornerRadius={5}
 			>
-				<View
-					ref={component => (this._container = component)}
-					style={[style, styles.container]}
-					onLayout={this.handleLayout}
+				<CardView
+					style={cardStyleImage}
+					cardElevation={2}
+					cardMaxElevation={2}
+					cornerRadius={5}
 				>
-					<Animated.Image
-						{...props}
-						style={[imageStyle, parallaxStyle]}
-						pointerEvents="none"
-					/>
-				</View>
+					<View
+						ref={component => (this._container = component)}
+						style={[style, styles.container]}
+						onLayout={this.handleLayout}
+					>
+						<Animated.Image
+							{...props}
+							style={[imageStyle, parallaxStyle]}
+							pointerEvents="none"
+						/>
+					</View>
+				</CardView>
 			</CardView>
 		)
 		// Since we can't allow nested Parallax.Images, we supply this shorthand to wrap a touchable
