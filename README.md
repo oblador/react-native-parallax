@@ -8,6 +8,18 @@
 npm install --save react-native-parallax
 ```
 
+### and 
+
+```
+yarn add react-native-cardview
+```
+
+```
+yarn add lodash
+```
+
+
+
 ## Usage
 
 *Note: `Parallax.Image` elements must be direct descendants of `Parallax.ScrollView`*

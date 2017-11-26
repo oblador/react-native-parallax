@@ -9,10 +9,11 @@ import {
 	StyleSheet,
 	Dimensions,
 	TouchableHighlight,
-	ViewPropTypes
+	ViewPropTypes,
+	Text
 } from 'react-native'
 import { isEqual } from 'lodash'
-
+import CardView from 'react-native-cardview'
 const WINDOW_HEIGHT = Dimensions.get('window').height
 
 type Props = {
@@ -100,18 +101,36 @@ class ParallaxImage extends React.Component<Props, State> {
 		}
 
 		var content = (
-			<View
-				ref={component => (this._container = component)}
+			<CardView
 				style={[style, styles.container]}
-				onLayout={this.handleLayout}
+				cardElevation={2}
+				cardMaxElevation={2}
+				cornerRadius={5}
 			>
-				<Animated.Image
-					{...props}
-					style={[imageStyle, parallaxStyle]}
-					pointerEvents="none"
-				/>
-				<View style={[styles.overlay, overlayStyle]}>{children}</View>
-			</View>
+				<View
+					ref={component => (this._container = component)}
+					style={[style, styles.container]}
+					onLayout={this.handleLayout}
+				>
+					<Animated.Image
+						{...props}
+						style={[imageStyle, parallaxStyle]}
+						pointerEvents="none"
+					/>
+				</View>
+			</CardView>
+			// <View
+			// 	ref={component => (this._container = component)}
+			// 	style={[style, styles.container]}
+			// 	onLayout={this.handleLayout}
+			// >
+			// <Animated.Image
+			// 	{...props}
+			// 	style={[imageStyle, parallaxStyle]}
+			// 	pointerEvents="none"
+			// />
+			// 	<View style={[styles.overlay, overlayStyle]}>{children}</View>
+			// </View>
 		)
 		// Since we can't allow nested Parallax.Images, we supply this shorthand to wrap a touchable
 		// around the element
