@@ -10,7 +10,8 @@ import {
 	Dimensions,
 	TouchableHighlight,
 	ViewPropTypes,
-	Text
+	Text,
+	TouchableOpacity
 } from 'react-native'
 import { isEqual } from 'lodash'
 import CardView from 'react-native-cardview'
@@ -135,12 +136,13 @@ class ParallaxImage extends React.Component<Props, State> {
 		// around the element
 		if (onPress) {
 			return (
-				<TouchableHighlight
+				<TouchableOpacity
+					activeOpacity={0.9}
 					ref={component => (this._touchable = component)}
 					onPress={onPress}
 				>
 					{content}
-				</TouchableHighlight>
+				</TouchableOpacity>
 			)
 		}
 		return content
