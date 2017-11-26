@@ -33,7 +33,8 @@ class ParallaxImage extends React.Component<Props, State> {
 		scrollY: PropTypes.object,
 		parallaxFactor: PropTypes.number,
 		imageStyle: ViewPropTypes.style,
-		overlayStyle: ViewPropTypes.style
+		overlayStyle: ViewPropTypes.style,
+		cardStyle: ViewPropTypes.style
 	}
 
 	constructor(props: Props) {
@@ -77,6 +78,7 @@ class ParallaxImage extends React.Component<Props, State> {
 			style,
 			imageStyle,
 			overlayStyle,
+			cardStyle,
 			children,
 			...props
 		} = this.props
@@ -102,7 +104,7 @@ class ParallaxImage extends React.Component<Props, State> {
 
 		var content = (
 			<CardView
-				style={[style, styles.container]}
+				style={cardStyle}
 				cardElevation={2}
 				cardMaxElevation={2}
 				cornerRadius={5}
@@ -119,18 +121,6 @@ class ParallaxImage extends React.Component<Props, State> {
 					/>
 				</View>
 			</CardView>
-			// <View
-			// 	ref={component => (this._container = component)}
-			// 	style={[style, styles.container]}
-			// 	onLayout={this.handleLayout}
-			// >
-			// <Animated.Image
-			// 	{...props}
-			// 	style={[imageStyle, parallaxStyle]}
-			// 	pointerEvents="none"
-			// />
-			// 	<View style={[styles.overlay, overlayStyle]}>{children}</View>
-			// </View>
 		)
 		// Since we can't allow nested Parallax.Images, we supply this shorthand to wrap a touchable
 		// around the element
